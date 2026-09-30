@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: ${BACKEND_TARGET:-runtime}
+    environment:
+      APP_ENV: production
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      MODEL_TYPE: ${MODEL_TYPE:-baseline}
+      MODEL_PATH: /app/${MODEL_PATH:-artifacts/baseline/demo-v1}
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+      CORS_ORIGINS: '${CORS_ORIGINS:-["http://localhost:3000"]}'
+      MAX_REVIEW_LENGTH: ${MAX_REVIEW_LENGTH:-10000}
+      MAX_BATCH_SIZE: ${MAX_BATCH_SIZE:-32}
+      MAX_REQUEST_BYTES: ${MAX_REQUEST_BYTES:-1048576}
+      PREDICTION_THRESHOLD: ${PREDICTION_THRESHOLD:-}
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+    init: true
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:3000:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    init: true
+  trainer:
+    profiles: [tools]
+    image: ${COMPOSE_PROJECT_NAME}-backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: ${BACKEND_TARGET:-runtime}
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./reports:/app/reports
+      - ./data/raw:/app/data/raw:ro
+    entrypoint: [reviews]
+    command: [--help]

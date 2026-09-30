@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "review-authenticity"
+version = "1.0.0"
+description = "Reproducible text classification, calibrated inference, and a small review UI"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1",
+  "pydantic-settings>=2.8,<3", "scikit-learn>=1.6,<2",
+  "pandas>=2.2,<3", "numpy>=2.2,<3", "scipy>=1.15,<2", "joblib>=1.4,<2",
+  "matplotlib>=3.10,<4",
+]
+
+[project.optional-dependencies]
+transformer = ["transformers>=4.50,<5", "torch>=2.6,<3"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<9", "pytest-cov>=6,<7", "httpx>=0.28,<1", "ruff>=0.11,<1"]
+
+[project.scripts]
+reviews = "review_authenticity.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/review_authenticity"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=review_authenticity --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = ["*/transformer.py"]

@@ -1,0 +1,15 @@
+.git
+.env
+.venv
+.tools
+.cache
+**/__pycache__
+**/node_modules
+frontend/dist
+data/raw
+artifacts
+reports
+.pytest_cache
+.ruff_cache
+.coverage
+*.log

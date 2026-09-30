@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "model_type": "baseline",
+  "model_name": "logistic_regression",
+  "version": "cornell-v1",
+  "trained_at": "2026-09-25T13:14:33.542804+00:00",
+  "demo": false,
+  "threshold": 0.5,
+  "label_mapping": {
+    "deceptive": 0,
+    "genuine": 1
+  },
+  "dataset_sha256": "e16952444fffdf9b20b1744215bf7c894151a5cf3f3ad09aa1e7007f6b48fc54",
+  "dataset_statistics": {
+    "input_rows": 1600,
+    "unique_rows": 1596,
+    "duplicates_removed": 4,
+    "class_counts": {
+      "deceptive": 800,
+      "genuine": 796
+    },
+    "minority_fraction": 0.49874686716791977,
+    "text_length": {
+      "min": 151,
+      "median": 699.5,
+      "max": 4159
+    }
+  },
+  "training_config": {
+    "seed": 42,
+    "validation_ratio": 0.15,
+    "test_ratio": 0.15,
+    "max_features": 30000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 1,
+    "max_df": 1.0,
+    "logistic_c": 1.0,
+    "class_weight": "balanced",
+    "nb_alpha": 1.0,
+    "calibration_folds": 3,
+    "selection_metric": "f1",
+    "threshold": 0.5
+  },
+  "split_sizes": {
+    "train": 1116,
+    "validation": 240,
+    "test": 240
+  },
+  "selection_metric": "f1",
+  "validation_comparison": {
+    "logistic_regression": {
+      "accuracy": 0.9083333333333333,
+      "precision": 0.9152542372881356,
+      "recall": 0.9,
+      "f1": 0.907563025210084,
+      "macro_f1": 0.9083269671504965,
+      "brier_score": 0.06316247867010483,
+      "log_loss": 0.20913542297785045,
+      "confusion_matrix": [
+        [
+          108,
+          12
+        ],
+        [
+          10,
+          110
+        ]
+      ],
+      "label_order": [
+        "deceptive",
+        "genuine"
+      ],
+      "positive_class": "deceptive",
+      "false_positives": 10,
+      "false_negatives": 12,
+      "sample_count": 240,
+      "classification_report": "              precision    recall  f1-score   support\n\n   deceptive       0.92      0.90      0.91       120\n     genuine       0.90      0.92      0.91       120\n\n    accuracy                           0.91       240\n   macro avg       0.91      0.91      0.91       240\nweighted avg       0.91      0.91      0.91       240\n",
+      "inference_ms_per_review": 0.754,
+      "split": "validation"
+    },
+    "naive_bayes": {
+      "accuracy": 0.9041666666666667,
+      "precision": 0.888,
+      "recall": 0.925,
+      "f1": 0.9061224489795918,
+      "macro_f1": 0.9041250542770299,
+      "brier_score": 0.06324837738982322,
+      "log_loss": 0.2069979522527388,
+      "confusion_matrix": [
+        [
+          111,
+          9
+        ],
+        [
+          14,
+          106
+        ]
+      ],
+      "label_order": [
+        "deceptive",
+        "genuine"
+      ],
+      "positive_class": "deceptive",
+      "false_positives": 14,
+      "false_negatives": 9,
+      "sample_count": 240,
+      "classification_report": "              precision    recall  f1-score   support\n\n   deceptive       0.89      0.93      0.91       120\n     genuine       0.92      0.88      0.90       120\n\n    accuracy                           0.90       240\n   macro avg       0.90      0.90      0.90       240\nweighted avg       0.90      0.90      0.90       240\n",
+      "inference_ms_per_review": 1.031,
+      "split": "validation"
+    }
+  },
+  "test_metrics": {
+    "accuracy": 0.8958333333333334,
+    "precision": 0.8925619834710744,
+    "recall": 0.9,
+    "f1": 0.8962655601659751,
+    "macro_f1": 0.8958315248528621,
+    "brier_score": 0.07741528617769412,
+    "log_loss": 0.2548050114731203,
+    "confusion_matrix": [
+      [
+        108,
+        12
+      ],
+      [
+        13,
+        107
+      ]
+    ],
+    "label_order": [
+      "deceptive",
+      "genuine"
+    ],
+    "positive_class": "deceptive",
+    "false_positives": 13,
+    "false_negatives": 12,
+    "sample_count": 240,
+    "classification_report": "              precision    recall  f1-score   support\n\n   deceptive       0.89      0.90      0.90       120\n     genuine       0.90      0.89      0.90       120\n\n    accuracy                           0.90       240\n   macro avg       0.90      0.90      0.90       240\nweighted avg       0.90      0.90      0.90       240\n",
+    "split": "test",
+    "model": "logistic_regression",
+    "demo": false
+  },
+  "calibration": "sigmoid_out_of_fold_train_only",
+  "libraries": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.3",
+    "joblib": "1.6.0"
+  },
+  "python": "3.12.5",
+  "model_sha256": "db04dfe56c42fe2ec7e1e69bc90c57fa0b22f94ce27266d5ba0d0819eb215c14"
+}

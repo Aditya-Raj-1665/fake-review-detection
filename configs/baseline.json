@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "validation_ratio": 0.15,
+  "test_ratio": 0.15,
+  "max_features": 30000,
+  "ngram_range": [1, 2],
+  "min_df": 1,
+  "max_df": 1.0,
+  "logistic_c": 1.0,
+  "class_weight": "balanced",
+  "nb_alpha": 1.0,
+  "calibration_folds": 3,
+  "selection_metric": "f1",
+  "threshold": 0.5
+}
